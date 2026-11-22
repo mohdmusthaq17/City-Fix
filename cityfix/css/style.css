@@ -1,0 +1,138 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f1f7f4;
+    color: #222;
+}
+
+header {
+    background: #123b32;
+    color: white;
+    padding: 22px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h2 {
+    font-size: 28px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #80e0b5;
+}
+
+.hero {
+    background: #dcefe7;
+    text-align: center;
+    padding: 65px 20px;
+}
+
+.hero h1 {
+    color: #123b32;
+    font-size: 36px;
+    margin-bottom: 25px;
+}
+
+.hero p {
+    margin: 15px 0;
+    font-size: 17px;
+}
+
+form {
+    background: white;
+    max-width: 430px;
+    margin: 30px auto;
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px #cbd8d1;
+}
+
+form input {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    font-size: 15px;
+}
+
+form input:focus {
+    outline: 2px solid #13865e;
+}
+
+.btn {
+    display: inline-block;
+    background: #13865e;
+    color: white;
+    padding: 14px 25px;
+    border: none;
+    border-radius: 7px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #0c6343;
+}
+
+form .btn {
+    width: 100%;
+    font-size: 16px;
+}
+
+footer {
+    background: #123b32;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+@media (max-width: 600px) {
+    header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav a {
+        margin: 5px;
+    }
+
+    .hero h1 {
+        font-size: 28px;
+    }
+}
+form select,
+form textarea {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    font-size: 15px;
+    font-family: Arial, sans-serif;
+}
+
+form textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+form label {
+    display: block;
+    text-align: left;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
