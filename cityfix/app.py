@@ -67,6 +67,11 @@ def classify(image):
     return best, totals[best]
 
 
+@app.route("/")
+def home():
+    return "CityFix AI service is running. The website sends photos to it automatically. You can also check /health"
+
+
 @app.route("/health")
 def health():
     return jsonify(status="ok")
