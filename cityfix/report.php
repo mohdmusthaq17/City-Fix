@@ -2,6 +2,39 @@
 session_start();
 include "db.php";
 
+// Ask the local AI service (ai_service/app.py) which category a photo belongs to.
+// Returns the category name, or null if the service is off or unsure.
+function detect_category_with_ai($path) {
+    if (!function_exists('curl_init')) {
+        $GLOBALS['ai_error'] = "PHP curl is not enabled in XAMPP, so the AI service cannot be reached.";
+        return null;
+    }
+    $ch = curl_init("http://127.0.0.1:5001/predict");
+    curl_setopt_array($ch, [
+        CURLOPT_POST => true,
+        CURLOPT_POSTFIELDS => ['image' => new CURLFile($path)],
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_TIMEOUT => 25,
+    ]);
+    $res = curl_exec($ch);
+    $http = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+    if ($res === false) {
+        $GLOBALS['ai_error'] = "The AI service is not running (or took too long). Start it with 'python app.py' in the ai_service folder, then try again.";
+        return null;
+    }
+    if ($http === 422) {
+        $GLOBALS['ai_error'] = "The AI is not sure what this photo shows. Please choose the category yourself.";
+        return null;
+    }
+    $data = json_decode($res, true);
+    $allowed = ["Road Damage", "Garbage", "Streetlights", "Water Leakage"];
+    if (isset($data['category']) && in_array($data['category'], $allowed, true)) {
+        return $data['category'];
+    }
+    return null;
+}
+
 // Check user login
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
@@ -23,6 +56,10 @@ $location = "";
 // Success message
 if (isset($_GET['success'])) {
     $message = "Your complaint has been submitted successfully!";
+    $detected_ok = ["Road Damage", "Garbage", "Streetlights", "Water Leakage"];
+    if (isset($_GET['detected']) && in_array($_GET['detected'], $detected_ok, true)) {
+        $message .= " AI detected the category: " . $_GET['detected'] . ".";
+    }
     $message_type = "success";
 }
 
@@ -40,6 +77,8 @@ if (isset($_POST['submit_report'])) {
         $category = trim($_POST['category'] ?? "");
         $description = trim($_POST['description'] ?? "");
         $location = trim($_POST['location'] ?? "");
+        $wants_auto = ($category === "auto");
+        $auto_category = 0;
 
         $allowed_categories = [
             "Road Damage",
@@ -53,7 +92,7 @@ if (isset($_POST['submit_report'])) {
 
         // Validate fields
         if (
-            !in_array($category, $allowed_categories, true) ||
+            (!$wants_auto && !in_array($category, $allowed_categories, true)) ||
             empty($description) ||
             empty($location)
         ) {
@@ -62,6 +101,15 @@ if (isset($_POST['submit_report'])) {
             $upload_success = false;
         }
 
+        // AI mode needs a photo
+        if (
+            $upload_success && $wants_auto &&
+            (!isset($_FILES['image']) || $_FILES['image']['error'] === UPLOAD_ERR_NO_FILE)
+        ) {
+            $message = "Please upload a photo so the AI can detect the category.";
+            $message_type = "error";
+            $upload_success = false;
+        }
         // Image upload
         if (
             $upload_success &&
@@ -120,6 +168,22 @@ if (isset($_POST['submit_report'])) {
             }
         }
 
+        // AI category detection
+        if ($upload_success && $wants_auto) {
+            $ai_category = detect_category_with_ai("uploads/" . $image_name);
+            if ($ai_category === null) {
+                if ($image_name && file_exists("uploads/" . $image_name)) {
+                    unlink("uploads/" . $image_name);
+                }
+                $message = $GLOBALS['ai_error'] ?? "The AI could not decide the category. Please choose it yourself.";
+                $message_type = "error";
+                $category = "";
+                $upload_success = false;
+            } else {
+                $category = $ai_category;
+                $auto_category = 1;
+            }
+        }
         // Save complaint
         if ($upload_success) {
 
@@ -146,9 +210,17 @@ if (isset($_POST['submit_report'])) {
                 if (mysqli_stmt_execute($stmt)) {
 
                     // Clear form data after success
+                    if ($auto_category === 1) {
+                        $new_id = (int)mysqli_insert_id($conn);
+                        mysqli_query($conn, "UPDATE complaints SET auto_category = 1 WHERE id = " . $new_id);
+                    }
                     unset($_SESSION['csrf_token']);
 
-                    header("Location: report.php?success=1");
+                    if ($auto_category === 1) {
+                        header("Location: report.php?success=1&detected=" . urlencode($category));
+                    } else {
+                        header("Location: report.php?success=1");
+                    }
                     exit();
 
                 } else {
@@ -290,6 +362,11 @@ if (isset($_POST['submit_report'])) {
 
             <select name="category" id="category" required>
                 <option value="">Select Category</option>
+
+                <option value="auto"
+                    <?php if ($category == "auto") echo "selected"; ?>>
+                    Not sure? Let AI detect it from my photo
+                </option>
 
                 <option value="Road Damage"
                     <?php if ($category == "Road Damage") echo "selected"; ?>>

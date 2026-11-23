@@ -232,6 +232,20 @@ mysqli_stmt_close($stmt);
 
     </section>
 
+    <?php
+    $pstmt = mysqli_prepare($conn, "SELECT points FROM users WHERE id = ?");
+    $puid = (int)$_SESSION['user_id'];
+    mysqli_stmt_bind_param($pstmt, "i", $puid);
+    mysqli_stmt_execute($pstmt);
+    $prow = mysqli_fetch_assoc(mysqli_stmt_get_result($pstmt));
+    mysqli_stmt_close($pstmt);
+    $my_points = (int)($prow['points'] ?? 0);
+    ?>
+    <p style="text-align:center; font-size:1.1rem; margin:10px 0;">
+        <strong>Your points: <?php echo $my_points; ?></strong>
+        &nbsp;|&nbsp; <a href="leaderboard.php">Leaderboard</a>
+    </p>
+
     <section class="stats-container">
 
         <div class="stat-card">

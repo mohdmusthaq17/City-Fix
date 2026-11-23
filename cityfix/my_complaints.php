@@ -294,6 +294,14 @@ $result = mysqli_stmt_get_result($stmt);
                 <div class="complaint-info">
 
                     <p>
+                        <strong>Category:</strong><br>
+                        <?php echo htmlspecialchars($row['category']); ?>
+                        <?php if (!empty($row['auto_category'])): ?>
+                            <em>(detected by AI from your photo)</em>
+                        <?php endif; ?>
+                    </p>
+
+                    <p>
                         <strong>Description:</strong><br>
                         <?php echo nl2br(htmlspecialchars($row['description'])); ?>
                     </p>

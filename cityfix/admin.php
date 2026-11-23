@@ -61,6 +61,41 @@ if (isset($_POST['update_status'])) {
     }
 }
 
+// Verify a genuine complaint and reward the citizen (once per complaint)
+define("POINTS_PER_VERIFIED", 10);
+if (isset($_POST['verify_complaint'])) {
+    if (
+        !isset($_POST['csrf_token']) ||
+        !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])
+    ) {
+        die("Invalid request.");
+    }
+    $id = (int)$_POST['complaint_id'];
+    if ($id > 0) {
+        $points = POINTS_PER_VERIFIED;
+        mysqli_begin_transaction($conn);
+        $stmt = mysqli_prepare($conn, "UPDATE complaints SET verified = 1 WHERE id = ? AND verified = 0");
+        mysqli_stmt_bind_param($stmt, "i", $id);
+        mysqli_stmt_execute($stmt);
+        $changed = mysqli_stmt_affected_rows($stmt);
+        mysqli_stmt_close($stmt);
+        if ($changed === 1) {
+            $stmt = mysqli_prepare(
+                $conn,
+                "UPDATE users SET points = points + ? WHERE id = (SELECT user_id FROM complaints WHERE id = ?)"
+            );
+            mysqli_stmt_bind_param($stmt, "ii", $points, $id);
+            mysqli_stmt_execute($stmt);
+            mysqli_stmt_close($stmt);
+        }
+        mysqli_commit($conn);
+        header("Location: admin.php?verified=1");
+        exit();
+    }
+}
+if (isset($_GET['verified'])) {
+    $message = "Complaint verified. The citizen earned " . POINTS_PER_VERIFIED . " points!";
+}
 if (isset($_GET['updated'])) {
     $message = "Complaint status updated successfully!";
 }
@@ -70,15 +105,15 @@ $search = trim($_GET['search'] ?? "");
 $status_filter = $_GET['status'] ?? "";
 $category_filter = $_GET['category'] ?? "";
 
-$sql = "SELECT complaints.*, Users.name, Users.email
+$sql = "SELECT complaints.*, users.name, users.email
         FROM complaints
-        JOIN Users ON complaints.user_id = Users.id
+        JOIN users ON complaints.user_id = users.id
         WHERE 1=1";
 
 if ($search !== "") {
     $search_safe = mysqli_real_escape_string($conn, $search);
-    $sql .= " AND (Users.name LIKE '%$search_safe%'
-              OR Users.email LIKE '%$search_safe%')";
+    $sql .= " AND (users.name LIKE '%$search_safe%'
+              OR users.email LIKE '%$search_safe%')";
 }
 
 if (in_array($status_filter, ["Pending", "In Progress", "Resolved"], true)) {
@@ -306,7 +341,7 @@ $stats = mysqli_fetch_assoc($stats_result);
 
                 <p>
                     <strong>Category:</strong>
-                    <?php echo htmlspecialchars($row['category']); ?>
+                    <?php echo htmlspecialchars($row['category']); ?><?php if (!empty($row['auto_category'])) echo ' (detected by AI)'; ?>
                 </p>
 
                 <p>
@@ -328,6 +363,19 @@ $stats = mysqli_fetch_assoc($stats_result);
                     <strong>Current Status:</strong>
                     <?php echo htmlspecialchars($row['status']); ?>
                 </p>
+
+                <p>
+                    <strong>Verified:</strong>
+                    <?php echo !empty($row['verified']) ? "Yes - citizen rewarded" : "Not yet"; ?>
+                </p>
+
+                <?php if (empty($row['verified'])): ?>
+                    <form method="POST" action="admin.php" style="margin-bottom:10px;">
+                        <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
+                        <input type="hidden" name="complaint_id" value="<?php echo (int)$row['id']; ?>">
+                        <button type="submit" name="verify_complaint">Verify genuine report (+<?php echo POINTS_PER_VERIFIED; ?> points)</button>
+                    </form>
+                <?php endif; ?>
 
                 <?php if (!empty($row['image'])): ?>
                     <p><strong>Complaint Image:</strong></p>

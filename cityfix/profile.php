@@ -11,7 +11,7 @@ if (!isset($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id'];
 
 // Get user details
-$sql = "SELECT name, email FROM Users WHERE id = ?";
+$sql = "SELECT name, email, points FROM users WHERE id = ?";
 $stmt = mysqli_prepare($conn, $sql);
 mysqli_stmt_bind_param($stmt, "i", $user_id);
 mysqli_stmt_execute($stmt);
@@ -252,6 +252,13 @@ mysqli_stmt_close($stmt);
                 <?php echo (int)$user_id; ?>
             </div>
         </div>
+
+        <h3 style="margin-bottom: 15px;">My Points</h3>
+        <p style="margin-bottom: 20px;">
+            <strong><?php echo (int)$user['points']; ?> points</strong>
+            earned from verified complaints.
+            <a href="leaderboard.php">See the leaderboard</a>
+        </p>
 
         <h3 style="margin-bottom: 15px;">My Complaint Statistics</h3>
 
