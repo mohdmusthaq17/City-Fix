@@ -40,7 +40,7 @@ mysqli_stmt_close($stmt);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>CityFix - User Dashboard</title>
+    <title>NagrikX - User Dashboard</title>
 
     <link rel="stylesheet" href="./css/style.css?v=3">
 
@@ -203,7 +203,7 @@ mysqli_stmt_close($stmt);
 
 <header>
 
-    <h2>CityFix</h2>
+    <h2>NagrikX</h2>
 
     <nav>
         <a href="index.php">Home</a>
@@ -219,7 +219,7 @@ mysqli_stmt_close($stmt);
 
     <section class="welcome">
 
-        <h1>Welcome to CityFix!</h1>
+        <h1>Welcome to NagrikX!</h1>
 
         <h2>
             Hello,
