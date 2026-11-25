@@ -8,7 +8,7 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>About Us - CityFix</title>
+    <title>About Us - NagrikX</title>
 
     <style>
         * {
@@ -139,7 +139,7 @@ session_start();
 <body>
 
 <header>
-    <h2>CityFix</h2>
+    <h2>NagrikX</h2>
 
     <nav>
         <a href="index.php">Home</a>
@@ -156,7 +156,7 @@ session_start();
 </header>
 
 <section class="hero">
-    <h1>About CityFix</h1>
+    <h1>About NagrikX</h1>
     <p>
         Making our cities cleaner, safer and better
         through digital civic complaint management.
@@ -168,7 +168,7 @@ session_start();
     <section class="section">
         <h2>Who We Are</h2>
         <p>
-            CityFix is a web-based civic complaint management
+            NagrikX is a web-based civic complaint management
             system designed to help citizens report common
             public problems in their areas. It provides a
             simple platform where users can submit complaints
@@ -225,9 +225,9 @@ session_start();
     </section>
 
     <section class="section">
-        <h2>Why Choose CityFix?</h2>
+        <h2>Why Choose NagrikX?</h2>
         <p>
-            CityFix allows users to submit complaints,
+            NagrikX allows users to submit complaints,
             upload supporting images, view their complaints
             and track updates. Administrators can manage
             complaints and update their status.
@@ -237,7 +237,7 @@ session_start();
 </main>
 
 <footer>
-    <p>&copy; <?php echo date("Y"); ?> CityFix. All Rights Reserved.</p>
+    <p>&copy; <?php echo date("Y"); ?> NagrikX. All Rights Reserved.</p>
 </footer>
 
 </body>
