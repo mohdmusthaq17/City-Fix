@@ -36,7 +36,7 @@ $result = mysqli_stmt_get_result($stmt);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>My Complaints - CityFix</title>
+    <title>My Complaints - NagrikX</title>
 
     <link rel="stylesheet" href="./css/style.css?v=4">
 
@@ -234,7 +234,7 @@ $result = mysqli_stmt_get_result($stmt);
 
 <header>
 
-    <h2>CityFix</h2>
+    <h2>NagrikX</h2>
 
     <nav>
         <a href="index.php">Home</a>
