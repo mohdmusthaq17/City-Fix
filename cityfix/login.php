@@ -60,14 +60,14 @@ if (isset($_POST['login'])) {
 <html>
 
 <head>
-    <title>CityFix Login</title>
+    <title>NagrikX Login</title>
     <link rel="stylesheet" href="./css/style.css?v=2">
 </head>
 
 <body>
 
 <header>
-    <h2>CityFix</h2>
+    <h2>NagrikX</h2>
 
     <nav>
         <a href="index.php">Home</a>
