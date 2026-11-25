@@ -79,7 +79,7 @@ Any complaints, users or photos shown in screenshots or demos are **demo data**,
 
 ## Run it on your computer
 
-See **[HOW_TO_RUN.md](HOW_TO_RUN.md)** for simple step-by-step instructions.
+See **[README.md](README.md)** for simple step-by-step instructions.
 
 ## Team
 
