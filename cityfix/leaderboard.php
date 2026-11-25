@@ -21,7 +21,7 @@ $result = mysqli_query(
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leaderboard - CityFix</title>
+    <title>Leaderboard - NagrikX</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
         .board { max-width: 600px; margin: 30px auto; padding: 25px; background: #fff;
@@ -34,7 +34,7 @@ $result = mysqli_query(
 </head>
 <body>
 <header>
-    <h2>CityFix</h2>
+    <h2>NagrikX</h2>
     <nav>
         <a href="dashboard.php">Dashboard</a>
         <a href="profile.php">My Profile</a>
