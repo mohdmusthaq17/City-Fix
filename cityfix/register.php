@@ -78,14 +78,14 @@ if (isset($_POST['register'])) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>CityFix Registration</title>
+    <title>NagrikX Registration</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
 <header>
-    <h2>CityFix</h2>
+    <h2>NagrikX</h2>
     <nav>
         <a href="index.php">Home</a>
         <a href="login.php">Login</a>
