@@ -48,7 +48,7 @@ mysqli_stmt_close($stmt);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Profile - CityFix</title>
+    <title>My Profile - NagrikX</title>
 
     <style>
         * {
@@ -212,7 +212,7 @@ mysqli_stmt_close($stmt);
 <body>
 
 <header>
-    <h2>CityFix</h2>
+    <h2>NagrikX</h2>
 
     <nav>
         <a href="dashboard.php">Dashboard</a>
@@ -231,7 +231,7 @@ mysqli_stmt_close($stmt);
             </div>
 
             <h1><?php echo htmlspecialchars($user['name']); ?></h1>
-            <p>CityFix User Profile</p>
+            <p>NagrikX User Profile</p>
         </div>
 
         <h3>Personal Information</h3>
