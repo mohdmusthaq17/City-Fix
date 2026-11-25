@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>CityFix | Smart City Complaint Portal</title>
+    <title>NagrikX | Smart City Complaint Portal</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -498,7 +498,7 @@
 
     <div class="section-tag">SIMPLE PROCESS</div>
 
-    <h2>How CityFix Works</h2>
+    <h2>How NagrikX Works</h2>
 
     <p class="section-description">
         Three simple steps to make a difference.
@@ -513,7 +513,7 @@
             <h3>Create an Account</h3>
 
             <p>
-                Register or log in to your CityFix account
+                Register or log in to your NagrikX account
                 to access the complaint portal.
             </p>
 
@@ -560,7 +560,7 @@
     </p>
 
     <a href="register.php" class="btn btn-primary">
-        Join CityFix Today →
+        Join NagrikX Today →
     </a>
 
 </section>
@@ -568,7 +568,7 @@
 <!-- Footer -->
 <footer>
 
-    <h2>CityFix.</h2>
+    <h2>NagrikX.</h2>
 
     <p>
         Building Better Cities Through Citizen Participation.
@@ -582,7 +582,7 @@
     </div>
 
     <p>
-        © 2026 CityFix. All Rights Reserved.
+        © 2026 NagrikX. All Rights Reserved.
     </p>
 
 </footer>
