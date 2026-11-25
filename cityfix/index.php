@@ -392,7 +392,7 @@
 <!-- Navigation -->
 <header>
 
-    <a href="index.php" class="logo">City<span>Fix.</span></a>
+    <a href="index.php" class="logo">Nagrik<span>X.</span></a>
 
     <nav>
         <a href="index.php">Home</a>
