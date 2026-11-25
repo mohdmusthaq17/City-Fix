@@ -61,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Contact Us - CityFix</title>
+    <title>Contact Us - NagrikX</title>
 
     <style>
 
@@ -208,7 +208,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <header>
 
-    <h2>CityFix</h2>
+    <h2>NagrikX</h2>
 
     <nav>
         <a href="index.php">Home</a>
@@ -286,7 +286,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </div>
 
 <footer>
-    <p>&copy; <?php echo date("Y"); ?> CityFix. All Rights Reserved.</p>
+    <p>&copy; <?php echo date("Y"); ?> NagrikX. All Rights Reserved.</p>
 </footer>
 
 </body>
