@@ -67,7 +67,7 @@ if (!$result) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Contact Messages - CityFix Admin</title>
+    <title>Contact Messages - NagrikX Admin</title>
 
     <style>
 
@@ -196,7 +196,7 @@ if (!$result) {
 
 <header>
 
-    <h2>CityFix Admin</h2>
+    <h2>NagrikX Admin</h2>
 
     <nav>
         <a href="admin.php">Dashboard</a>
