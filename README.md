@@ -141,8 +141,8 @@ Road Damage, Garbage, Streetlights, Water Leakage.
 | `report.php` | Report a problem: photo, map pin, AI category detection |
 | `admin.php`, `admin_messages.php` | Admin pages (status, verify and points, disputed filter, messages) |
 | `leaderboard.php` | Top 10 citizens by points |
-| `db.php` | Connects the website to the database (**not in this repo**, see below) |
-| `ai_config.php` | Gemini API key and model names (**not in this repo**, see below) |
+| `db.php`(db_#.php) | Connects the website to the database (**not in this repo**, see below) |
+| `ai_config.php` (ai_config_#.php)| Gemini API key and model names (**not in this repo**, see below) |
 | `cityfix.sql` | Database blueprint |
 | `update_points.sql` | Adds points and AI columns |
 | `css/`, `uploads/` | Styles and uploaded photos |
