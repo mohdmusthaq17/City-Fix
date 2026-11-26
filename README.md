@@ -247,8 +247,8 @@ Add your team's names and roles here.
 
 | Name | Role |
 |---|---|
-| Srijal Shiwani | *(add role)* |
-| *(add name)* | *(add role)* |
+| Srijal Shiwani | Backend Developer/UI-UX Desinger |
+| Mohammed Musthaq | Frontend Developer/ Cybersecurity Developer |
 
 ---
 
